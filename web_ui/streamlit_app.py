@@ -1,7 +1,7 @@
 # web_ui/streamlit_app.py
 
 import streamlit as st
-from app.haystack_pipeline import pipe
+from haystack_pipeline import pipe
 
 st.set_page_config(page_title="Cyber Policy Chatbot", layout="centered")
 st.title("📘 Cybersecurity Policy Chatbot")
