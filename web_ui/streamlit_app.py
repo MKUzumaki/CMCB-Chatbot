@@ -4,7 +4,8 @@ import fitz
 from pathlib import Path
 
 from haystack.document_stores import InMemoryDocumentStore
-# from haystack.nodes import PDFToTextConverter, PreProcessor, EmbeddingRetriever
+# from haystack.nodes import PDFToTextConverter
+from haystack.nodes import PreProcessor
 from haystack.pipelines import ExtractiveQAPipeline
 from haystack.nodes import FARMReader
 from haystack.schema import Document
@@ -25,9 +26,9 @@ pdf_path = Path(__file__).parent.parent / "data" / "TCRMG.pdf"
 text = extract_text_from_pdf(str(pdf_path))
 docs = [{"content": text}]
 
-# preprocessor = PreProcessor(split_length=100, split_overlap=10)
-# processed_docs = preprocessor.process(docs)
-# document_store.write_documents(processed_docs)
+preprocessor = PreProcessor(split_length=100, split_overlap=10)
+processed_docs = preprocessor.process(docs)
+document_store.write_documents(processed_docs)
 
 # 3. Retriever and Reader
 retriever = EmbeddingRetriever(document_store=document_store, embedding_model="sentence-transformers/all-MiniLM-L6-v2", use_gpu=False)
