@@ -3,3 +3,4 @@ streamlit
 sentence-transformers
 farm-haystack
 pymupdf
+sentence-transformers
