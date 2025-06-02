@@ -30,7 +30,7 @@ docs = [{"content": text}]
 # document_store.write_documents(processed_docs)
 
 # 3. Retriever and Reader
-retriever = EmbeddingRetriever(document_store=document_store, embedding_model="sentence-transformers/all-MiniLM-L6-v2")
+retriever = EmbeddingRetriever(document_store=document_store, embedding_model="sentence-transformers/all-MiniLM-L6-v2", use_gpu=False)
 document_store.update_embeddings(retriever)
 
 reader = FARMReader(model_name_or_path="deepset/roberta-base-squad2")
