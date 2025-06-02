@@ -8,6 +8,7 @@ from haystack.document_stores import InMemoryDocumentStore
 from haystack.pipelines import ExtractiveQAPipeline
 from haystack.nodes import FARMReader
 from haystack.schema import Document
+from haystack.nodes import EmbeddingRetriever
 
 # 1. Create a Document Store
 document_store = InMemoryDocumentStore(use_bm25=True)
