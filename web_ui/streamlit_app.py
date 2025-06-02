@@ -1,5 +1,7 @@
 import streamlit as st
 
+from pathlib import Path
+
 from haystack.document_stores import InMemoryDocumentStore
 from haystack.nodes import PDFToTextConverter, PreProcessor, EmbeddingRetriever
 from haystack.pipelines import ExtractiveQAPipeline
@@ -10,7 +12,8 @@ document_store = InMemoryDocumentStore(use_bm25=True)
 
 # 2. Convert and Preprocess Documents
 converter = PDFToTextConverter(remove_numeric_tables=True)
-docs = converter.convert(file_path="data/TCRMG.pdf", meta=None)
+pdf_path = Path(__file__).parent.parent / "data" / "TCRMG.pdf"
+docs = converter.convert(file_path=str(pdf_path))
 
 preprocessor = PreProcessor(split_length=100, split_overlap=10)
 processed_docs = preprocessor.process(docs)
