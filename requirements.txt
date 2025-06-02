@@ -1,0 +1,4 @@
+setuptools<81
+streamlit
+sentence-transformers
+farm-haystack[preprocessing,inference]
