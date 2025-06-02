@@ -8,7 +8,7 @@ document_store = InMemoryDocumentStore(use_bm25=True)
 
 # 2. Convert and Preprocess Documents
 converter = PDFToTextConverter(remove_numeric_tables=True)
-docs = converter.convert(file_path="data/cyber_policy.pdf", meta=None)
+docs = converter.convert(file_path="data/1_National_Bank_of_Cambodia_TCRMG_Draft_V1_8_Consolidated_210225 (1).pdf", meta=None)
 
 preprocessor = PreProcessor(split_length=100, split_overlap=10)
 processed_docs = preprocessor.process(docs)
