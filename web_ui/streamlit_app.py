@@ -1,5 +1,9 @@
 # web_ui/streamlit_app.py
 
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import streamlit as st
 from app.haystack_pipeline import pipe
 
@@ -11,7 +15,7 @@ query = st.text_input("🔎 Enter your question:")
 if query:
     with st.spinner("Searching for answers..."):
         result = pipe.run(query=query, params={"Retriever": {"top_k": 5}, "Reader": {"top_k": 1}})
-        if result["answers"]:
+        if result["answers"] and result["answers"][0].answer:
             st.success(f"🗨️ Answer: {result['answers'][0].answer}")
         else:
-            st.warning("Sorry, I couldn't find an answer.")
+            st.warning("Sorry, I couldn't find a valid answer.")
