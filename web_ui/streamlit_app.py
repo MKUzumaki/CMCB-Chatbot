@@ -1,19 +1,28 @@
 import streamlit as st
+import fitz
 
 from pathlib import Path
 
 from haystack.document_stores import InMemoryDocumentStore
-from haystack.nodes import PDFToTextConverter, PreProcessor, EmbeddingRetriever
+# from haystack.nodes import PDFToTextConverter, PreProcessor, EmbeddingRetriever
 from haystack.pipelines import ExtractiveQAPipeline
 from haystack.nodes import FARMReader
+from haystack.schema import Document
 
 # 1. Create a Document Store
 document_store = InMemoryDocumentStore(use_bm25=True)
 
 # 2. Convert and Preprocess Documents
-converter = PDFToTextConverter(remove_numeric_tables=True)
+def extract_text_from_pdf(pdf_path):
+    doc = fitz.open(pdf_path)
+    text = ""
+    for page in doc:
+        text += page.get_text()
+    returen text
+    
 pdf_path = Path(__file__).parent.parent / "data" / "TCRMG.pdf"
-docs = converter.convert(file_path=str(pdf_path))
+text = extract_text_from_pdf(str(pdf_path))
+docs = [{"content": text}]
 
 preprocessor = PreProcessor(split_length=100, split_overlap=10)
 processed_docs = preprocessor.process(docs)
