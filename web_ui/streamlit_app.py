@@ -18,7 +18,7 @@ def extract_text_from_pdf(pdf_path):
     text = ""
     for page in doc:
         text += page.get_text()
-    returen text
+    return text
     
 pdf_path = Path(__file__).parent.parent / "data" / "TCRMG.pdf"
 text = extract_text_from_pdf(str(pdf_path))
