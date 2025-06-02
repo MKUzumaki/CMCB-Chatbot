@@ -7,7 +7,7 @@ from haystack.document_stores import InMemoryDocumentStore
 # from haystack.nodes import PDFToTextConverter
 from haystack.nodes import PreProcessor
 from haystack.pipelines import ExtractiveQAPipeline
-from haystack.nodes import FARMReader
+from haystack.nodes import TransformersReader
 from haystack.schema import Document
 from haystack.nodes import EmbeddingRetriever
 
@@ -34,7 +34,7 @@ docs = [{"content": text}]
 retriever = EmbeddingRetriever(document_store=document_store, embedding_model="sentence-transformers/all-MiniLM-L6-v2", use_gpu=False)
 document_store.update_embeddings(retriever)
 
-reader = FARMReader(model_name_or_path="deepset/roberta-base-squad2")
+reader = TransformersReader(model_name_or_path="deepset/roberta-base-squad2", use_gpu=False)
 
 # 4. Build QA Pipeline
 pipe = ExtractiveQAPipeline(reader, retriever)
