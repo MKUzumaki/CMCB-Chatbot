@@ -1,3 +1,3 @@
 streamlit
-farm-haystack[preprocessing,inference]
+farm-haystack[all]
 sentence-transformers
